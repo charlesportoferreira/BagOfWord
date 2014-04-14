@@ -1,0 +1,27 @@
+Classificador | base | stoplist | ngram | MinMaxFreq | desvio | MinMaxFiles | Medida | Atributos | Total | - | 
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.2desvio|0-0minfiles|tf |3369| 24.0 | |
+misc.HyperPipes | C50test|verbos.xml|2gram|0-0minFreq|1.3desvio|0-0minfiles|tf |4501| 35.4 | |
+misc.HyperPipes | C50test|ingl.xml|3gram|0-0minFreq|1.4desvio|0-0minfiles|tf |6451| 47.68 | |
+misc.HyperPipes | C50test|adverbiosingl.xml|4gram|0-0minFreq|1.5desvio|0-0minfiles|tf |10226| 59.16 | |
+misc.HyperPipes | C50test|adverbiosverbos.xml|1-2gram|0-0minFreq|1.6desvio|0-0minfiles|tf |26514| 81.36 | |
+misc.HyperPipes | C50test|adverbiosverbosingl.xml|1-3gram|0-0minFreq|1.2desvio|0-0minfiles|tf |3369| 24.0 ||
+misc.HyperPipes | C50test|verbosingl.xml|1-4gram|0-0minFreq|1.3desvio|0-0minfiles|tf |4501| 35.4 ||
+misc.HyperPipes | C50test|adverbios.xml|2-3gram|0-0minFreq|1.4desvio|0-0minfiles|tf |6451| 47.68 ||
+misc.HyperPipes | C50test|adverbios.xml|2-4gram|0-0minFreq|1.5desvio|0-0minfiles|tf |10226| 59.16 ||
+misc.HyperPipes | C50test|adverbios.xml|3-4gram|0-0minFreq|1.6desvio|0-0minfiles|tf |26514| 81.36 ||
+misc.HyperPipes | C50test|adverbios.xml|1-2-3gram|0-0minFreq|1.2desvio|0-0minfiles|tf |3369| 24.0 ||
+misc.HyperPipes | C50test|adverbios.xml|1-2-4gram|0-0minFreq|1.3desvio|0-0minfiles|tf |4501| 35.4 ||
+misc.HyperPipes | C50test|adverbios.xml|1-3-4gram|0-0minFreq|1.4desvio|0-0minfiles|tf |6451| 47.68 ||
+misc.HyperPipes | C50test|adverbios.xml|2-3-4gram|0-0minFreq|1.5desvio|0-0minfiles|tf |10226| 59.16 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.6desvio|0-0minfiles|tf |26514| 81.36 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.2desvio|0-0minfiles|tf |3369| 24.0 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.3desvio|0-0minfiles|tf |4501| 35.4 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.4desvio|0-0minfiles|tf |6451| 47.68 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.5desvio|0-0minfiles|tf |10226| 59.16 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.6desvio|0-0minfiles|tf |26514| 81.36 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.2desvio|0-0minfiles|tf |3369| 24.0 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.3desvio|0-0minfiles|tf |4501| 35.4 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.4desvio|0-0minfiles|tf |6451| 47.68 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.5desvio|0-0minfiles|tf |10226| 59.16 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.6desvio|0-0minfiles|tf |26514| 81.36 ||
+misc.HyperPipes | C50test|adverbios.xml|1gram|0-0minFreq|1.6desvio|0-0minfiles|tf |26514| 81.36 ||

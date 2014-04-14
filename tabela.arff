@@ -1,0 +1,16 @@
+@RELATION Tabela_de_Resultados
+
+@ATTRIBUTE a1 NUMERIC
+@ATTRIBUTE a2 NUMERIC
+@ATTRIBUTE ta3 NUMERIC
+@ATTRIBUTE classe {C1, C2, C3}
+
+@DATA
+
+0, 0, 0,C1
+0, 0, 1,C2
+0, 1, 0,C1
+0, 1, 1,C2
+1, 0, 0,C1
+1, 1, 0,C2
+
