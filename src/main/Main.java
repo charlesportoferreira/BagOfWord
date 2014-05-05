@@ -28,20 +28,41 @@ public class Main {
 
         ArrayList<String> atributosVerificacao = new ArrayList<>();
         atributosVerificacao.addAll(Arrays.asList("|adverbios.xml",
-                "|verbos.xml", "|ingl.xml", "|adverbiosingl.xml", "|adverbiosverbos.xml",
-                "|adverbiosverbosingl.xml","|verbosingl","|1gram",
-                "|2gram", "|3gram", "|4gram", "|1-2gram", "|1-3gram", "|1-4gram", "|2-3gram",
-                "|2-4gram", "|3-4gram", "|1-2-3gram", "|1-2-4gram", "|1-3-4gram", "|2-3-4gram",
-                "1.2desvio", "1.3desvio", "1.4desvio", "1.5desvio", "1.6desvio"));
+                "|verbos.xml",
+                "|ingl.xml",
+                // "|adverbiosingl.xml",
+                // "|adverbiosverbos.xml",
+                // "|adverbiosverbosingl.xml",
+                // "|verbosingl",
+                "|1gram",
+                "|2gram",
+                "|3gram",
+                "|4gram",
+                "|1-2gram",
+                "|1-3gram",
+                "|1-4gram",
+                "|2-3gram",
+                "|2-4gram",
+                "|3-4gram",
+                "|1-2-3gram",
+                "|1-2-4gram",
+                "|1-3-4gram",
+                "|2-3-4gram",
+                "1.2desvio",
+                "1.3desvio",
+                "1.4desvio",
+                "1.5desvio",
+                "1.6desvio",
+                "acertos"));
 
-        BagOfWord bow = new BagOfWord(26);
+        BagOfWord bow = new BagOfWord(atributosVerificacao.size());
         bow.addAtributo("st_adv", "NUMERIC");
         bow.addAtributo("st_ver", "NUMERIC");
         bow.addAtributo("st_ing", "NUMERIC");
-        bow.addAtributo("st_adv_ing", "NUMERIC");
-        bow.addAtributo("st_adv_ver", "NUMERIC");
-        bow.addAtributo("st_adv_ver_ing", "NUMERIC");
-        bow.addAtributo("st_ver_ing", "NUMERIC");
+        //bow.addAtributo("st_adv_ing", "NUMERIC");
+        //bow.addAtributo("st_adv_ver", "NUMERIC");
+        //bow.addAtributo("st_adv_ver_ing", "NUMERIC");
+        //bow.addAtributo("st_ver_ing", "NUMERIC");
         bow.addAtributo("1g", "NUMERIC");
         bow.addAtributo("2g", "NUMERIC");
         bow.addAtributo("3g", "NUMERIC");
@@ -61,17 +82,18 @@ public class Main {
         bow.addAtributo("dv_1_4", "NUMERIC");
         bow.addAtributo("dv_1_5", "NUMERIC");
         bow.addAtributo("dv_1_6", "NUMERIC");
+        bow.addAtributo("acerto", "NUMERIC");
 
-        bow.addListClasses(Arrays.asList(new String[]{"20_29","30_39", "40_49", "50_59", "60_69", "70_79", "80_89"}));
-        int valoresAtributos[] = new int[26];
+        bow.addListClasses(Arrays.asList(new String[]{"20_29", "30_39", "40_49", "50_59", "60_69", "70_79", "80_89"}));
+        double valoresAtributos[] = new double[atributosVerificacao.size()];
 
         File arquivo = new File("analiseResultados.csv");
         try {
             try (FileReader fr = new FileReader(arquivo); BufferedReader br = new BufferedReader(fr)) {
                 while (br.ready()) {
                     String linha = br.readLine();
-                    
-                    if (linha.contains("NaN") || linha.contains("Classificador") || linha.length() < 10 || linha.contains("misc")|| linha.contains("port")) {
+
+                    if ( possuiPalavraExcluida(linha) || linha.length() < 10) {
                         continue;
                     }
                     for (int i = 0; i < atributosVerificacao.size(); i++) {
@@ -85,10 +107,9 @@ public class Main {
             ex.printStackTrace();
         }
 
-        for (int i : valoresAtributos) {
-
-        }
-
+//        for (int i : valoresAtributos) {
+//
+//        }
     }
 
     private static BagOfWord createBagOFWordTeste() {
@@ -97,18 +118,24 @@ public class Main {
         bow.addAtributo("a2", "NUMERIC");
         bow.addAtributo("ta3", "NUMERIC");
         bow.addListClasses(Arrays.asList(new String[]{"C1", "C2", "C3"}));
-        bow.addValoresDosAtributos(new int[]{0, 0, 0}, "C1");
-        bow.addValoresDosAtributos(new int[]{0, 0, 1}, "C2");
-        bow.addValoresDosAtributos(new int[]{0, 1, 0}, "C1");
-        bow.addValoresDosAtributos(new int[]{0, 1, 1}, "C2");
-        bow.addValoresDosAtributos(new int[]{1, 0, 0}, "C1");
-        bow.addValoresDosAtributos(new int[]{1, 1, 0}, "C2");
+        bow.addValoresDosAtributos(new double[]{0, 0, 0}, "C1");
+        bow.addValoresDosAtributos(new double[]{0, 0, 1}, "C2");
+        bow.addValoresDosAtributos(new double[]{0, 1, 0}, "C1");
+        bow.addValoresDosAtributos(new double[]{0, 1, 1}, "C2");
+        bow.addValoresDosAtributos(new double[]{1, 0, 0}, "C1");
+        bow.addValoresDosAtributos(new double[]{1, 1, 0}, "C2");
         bow.createArffFile("Teste");
         return bow;
     }
 
-
-    public static int possuiAtributo(String atributo, String texto) {
+    public static double possuiAtributo(String atributo, String texto) {
+        if (atributo.equals("acertos")) {
+            Pattern r = Pattern.compile("[0-9][0-9][\\.][0-9]+");
+            Matcher m = r.matcher(texto);
+            if (m.find()) {
+                return Double.parseDouble(texto.substring(m.start(), m.end()));
+            }
+        }
         return texto.contains(atributo) ? 1 : 0;
     }
 
@@ -138,11 +165,30 @@ public class Main {
             if (resultado >= 80.00 && resultado <= 89.99) {
                 return "80_89";
             }
-            
 
             return " !!!!! " + resultado;
         }
 
         return " ???? ";
+    }
+
+    private static boolean possuiPalavraExcluida(String linha) {
+        boolean possui = false;
+        ArrayList<String> palavrasExcluidas = new ArrayList<>();
+        palavrasExcluidas.add("misc");
+        palavrasExcluidas.add("NaN");
+        palavrasExcluidas.add("Classificador");
+        palavrasExcluidas.add("port");
+        palavrasExcluidas.add("|adverbiosingl.xml");
+        palavrasExcluidas.add("|adverbiosverbos.xml");
+        palavrasExcluidas.add("|adverbiosverbosingl.xml");
+        palavrasExcluidas.add("|verbosingl");
+        for (String palavra : palavrasExcluidas) {
+            if (linha.contains(palavra)) {
+                possui = true;
+            }
+        }
+       
+        return possui;
     }
 }

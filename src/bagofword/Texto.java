@@ -12,19 +12,19 @@ package bagofword;
 public class Texto {
 
     
-    private int[] valoresAtributos;
+    private double[] valoresAtributos;
     private String classe;
 
-    Texto(int valoresAtributos[], String nomeClasse) {
+    Texto(double valoresAtributos[], String nomeClasse) {
         this.valoresAtributos = valoresAtributos;
         this.classe = nomeClasse;
     }
 
-    public int[] getValoresAtributos() {
+    public double[] getValoresAtributos() {
         return valoresAtributos;
     }
 
-    public void setValoresAtributos(int[] valoresAtributos) {
+    public void setValoresAtributos(double[] valoresAtributos) {
         this.valoresAtributos = valoresAtributos;
     }
 

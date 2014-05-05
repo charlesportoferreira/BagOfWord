@@ -33,14 +33,14 @@ public class BagOfWord {
     }
 
     
-    public void addValoresDosAtributos(int atributos[], String nomeClasse) {
+    public void addValoresDosAtributos(double atributos[], String nomeClasse) {
         if (atributos.length != qtdeAtributos) {
             throw new RuntimeException("quantidade de atributos errada");
         }
         
         
         //usar arrayClone porque array sao passados por referencia em java
-        bagOfWord.add(new Texto((int[])atributos.clone(), nomeClasse));
+        bagOfWord.add(new Texto((double[])atributos.clone(), nomeClasse));
        
     }
 
