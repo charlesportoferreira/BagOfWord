@@ -30,78 +30,139 @@ public class Main {
         atributosVerificacao.addAll(Arrays.asList("|adverbios.xml",
                 "|verbos.xml",
                 "|ingl.xml",
-                // "|adverbiosingl.xml",
-                // "|adverbiosverbos.xml",
-                // "|adverbiosverbosingl.xml",
-                // "|verbosingl",
+                //"|adverbiosingl.xml",
+                //"|adverbiosverbos.xml",
+                //"|adverbiosverbosingl.xml",
+                //"|verbosingl",
                 "|1gram",
                 "|2gram",
                 "|3gram",
                 "|4gram",
-                "|1-2gram",
-                "|1-3gram",
-                "|1-4gram",
-                "|2-3gram",
-                "|2-4gram",
-                "|3-4gram",
-                "|1-2-3gram",
-                "|1-2-4gram",
-                "|1-3-4gram",
-                "|2-3-4gram",
+                //"|1-2gram",
+                //"|1-3gram",
+                //"|1-4gram",
+                //"|2-3gram",
+                //"|2-4gram",
+                //"|3-4gram",
+                //"|1-2-3gram",
+                //"|1-2-4gram",
+                //"|1-3-4gram",
+                //"|2-3-4gram",
                 "1.2desvio",
                 "1.3desvio",
                 "1.4desvio",
                 "1.5desvio",
-                "1.6desvio",
-                "acertos"));
+                "1.6desvio"));
+        // "acertos"));
 
         BagOfWord bow = new BagOfWord(atributosVerificacao.size());
-        bow.addAtributo("st_adv", "NUMERIC");
-        bow.addAtributo("st_ver", "NUMERIC");
-        bow.addAtributo("st_ing", "NUMERIC");
+        bow.addAtributo("st_adv", "NUMERIC");//0
+        bow.addAtributo("st_ver", "NUMERIC");//1
+        bow.addAtributo("st_ing", "NUMERIC");//2
         //bow.addAtributo("st_adv_ing", "NUMERIC");
         //bow.addAtributo("st_adv_ver", "NUMERIC");
         //bow.addAtributo("st_adv_ver_ing", "NUMERIC");
         //bow.addAtributo("st_ver_ing", "NUMERIC");
-        bow.addAtributo("1g", "NUMERIC");
-        bow.addAtributo("2g", "NUMERIC");
-        bow.addAtributo("3g", "NUMERIC");
-        bow.addAtributo("4g", "NUMERIC");
-        bow.addAtributo("1g_2g", "NUMERIC");
-        bow.addAtributo("1g_3g", "NUMERIC");
-        bow.addAtributo("1g_4g", "NUMERIC");
-        bow.addAtributo("2g_3g", "NUMERIC");
-        bow.addAtributo("2g_4g", "NUMERIC");
-        bow.addAtributo("3g_4g", "NUMERIC");
-        bow.addAtributo("1g_2g_3g", "NUMERIC");
-        bow.addAtributo("1g_2g_4g", "NUMERIC");
-        bow.addAtributo("1g_3g_4g", "NUMERIC");
-        bow.addAtributo("2g_3g_4g", "NUMERIC");
-        bow.addAtributo("dv_1_2", "NUMERIC");
-        bow.addAtributo("dv_1_3", "NUMERIC");
-        bow.addAtributo("dv_1_4", "NUMERIC");
-        bow.addAtributo("dv_1_5", "NUMERIC");
-        bow.addAtributo("dv_1_6", "NUMERIC");
-        bow.addAtributo("acerto", "NUMERIC");
+        bow.addAtributo("1g", "NUMERIC");//3
+        bow.addAtributo("2g", "NUMERIC");//4
+        bow.addAtributo("3g", "NUMERIC");//5
+        bow.addAtributo("4g", "NUMERIC");//6
+        //bow.addAtributo("1g_2g", "NUMERIC");
+        //bow.addAtributo("1g_3g", "NUMERIC");
+        //bow.addAtributo("1g_4g", "NUMERIC");
+        //bow.addAtributo("2g_3g", "NUMERIC");
+        //bow.addAtributo("2g_4g", "NUMERIC");
+        // bow.addAtributo("3g_4g", "NUMERIC");
+        // bow.addAtributo("1g_2g_3g", "NUMERIC");
+        // bow.addAtributo("1g_2g_4g", "NUMERIC");
+        // bow.addAtributo("1g_3g_4g", "NUMERIC");
+        // bow.addAtributo("2g_3g_4g", "NUMERIC");
+        bow.addAtributo("dv_1_2", "NUMERIC");//7
+        bow.addAtributo("dv_1_3", "NUMERIC");//8
+        bow.addAtributo("dv_1_4", "NUMERIC");//9
+        bow.addAtributo("dv_1_5", "NUMERIC");//10
+        bow.addAtributo("dv_1_6", "NUMERIC");//11
+        //bow.addAtributo("acerto", "NUMERIC");
 
         bow.addListClasses(Arrays.asList(new String[]{"20_29", "30_39", "40_49", "50_59", "60_69", "70_79", "80_89"}));
-        double valoresAtributos[] = new double[atributosVerificacao.size()];
+       
 
         File arquivo = new File("analiseResultados.csv");
         try {
             try (FileReader fr = new FileReader(arquivo); BufferedReader br = new BufferedReader(fr)) {
                 while (br.ready()) {
                     String linha = br.readLine();
-
-                    if ( possuiPalavraExcluida(linha) || linha.length() < 10) {
+                     double valoresAtributos[] = new double[atributosVerificacao.size()];
+                    if (possuiPalavraExcluida(linha) || linha.length() < 10) {
                         continue;
                     }
                     for (int i = 0; i < atributosVerificacao.size(); i++) {
                         valoresAtributos[i] = possuiAtributo(atributosVerificacao.get(i), linha);
                     }
+                    if (linha.contains("|adverbiosingl.xml")) {
+                        valoresAtributos[0] = 1;
+                        valoresAtributos[2] = 1;
+                    }
+                    if (linha.contains("|adverbiosverbos.xml")) {
+                        valoresAtributos[0] = 1;
+                        valoresAtributos[1] = 1;
+                    }
+                    if (linha.contains("|adverbiosverbosingl.xml")) {
+                        valoresAtributos[0] = 1;
+                        valoresAtributos[1] = 1;
+                        valoresAtributos[2] = 1;
+                    }
+                     if (linha.contains("|verbosingl")) {
+                        valoresAtributos[1] = 1;
+                        valoresAtributos[2] = 1;
+                    }
+                    if (linha.contains("|1-2gram")) {
+                        valoresAtributos[3] = 1;
+                        valoresAtributos[4] = 1;
+                    }
+                    if (linha.contains("|1-3gram")) {
+                        valoresAtributos[3] = 1;
+                        valoresAtributos[5] = 1;
+                    }
+                    if (linha.contains("|1-4gram")) {
+                        valoresAtributos[3] = 1;
+                        valoresAtributos[6] = 1;
+                    }
+                    if (linha.contains("|2-3gram")) {
+                        valoresAtributos[4] = 1;
+                        valoresAtributos[5] = 1;
+                    }
+                    if (linha.contains("|2-4gram")) {
+                        valoresAtributos[4] = 1;
+                        valoresAtributos[6] = 1;
+                    }
+                    if (linha.contains("|3-4gram")) {
+                        valoresAtributos[5] = 1;
+                        valoresAtributos[6] = 1;
+                    }
+                    if (linha.contains("|1-2-3gram")) {
+                        valoresAtributos[3] = 1;
+                        valoresAtributos[4] = 1;
+                        valoresAtributos[5] = 1;
+                    }
+                    if (linha.contains("|1-2-4gram")) {
+                        valoresAtributos[3] = 1;
+                        valoresAtributos[4] = 1;
+                        valoresAtributos[6] = 1;
+                    }
+                    if (linha.contains("|1-3-4gram")) {
+                        valoresAtributos[3] = 1;
+                        valoresAtributos[5] = 1;
+                        valoresAtributos[6] = 1;
+                    }
+                    if (linha.contains("|2-3-4gram")) {
+                        valoresAtributos[4] = 1;
+                        valoresAtributos[5] = 1;
+                        valoresAtributos[6] = 1;
+                    }
                     bow.addValoresDosAtributos(valoresAtributos, getNomeClasse(linha));
                 }
-                bow.createArffFile("SMO");
+                bow.createArffFile("S5");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -179,16 +240,16 @@ public class Main {
         palavrasExcluidas.add("NaN");
         palavrasExcluidas.add("Classificador");
         palavrasExcluidas.add("port");
-        palavrasExcluidas.add("|adverbiosingl.xml");
-        palavrasExcluidas.add("|adverbiosverbos.xml");
-        palavrasExcluidas.add("|adverbiosverbosingl.xml");
-        palavrasExcluidas.add("|verbosingl");
+        //palavrasExcluidas.add("|adverbiosingl.xml");
+        //palavrasExcluidas.add("|adverbiosverbos.xml");
+        //palavrasExcluidas.add("|adverbiosverbosingl.xml");
+        //palavrasExcluidas.add("|verbosingl");
         for (String palavra : palavrasExcluidas) {
             if (linha.contains(palavra)) {
                 possui = true;
             }
         }
-       
+
         return possui;
     }
 }
